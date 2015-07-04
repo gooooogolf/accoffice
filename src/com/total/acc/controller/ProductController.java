@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.total.acc.model.domain.Product;
 import com.total.acc.model.service.ProductService;
+import com.total.acc.util.DateTime;
 
 /**
  * @author Sirimongkol
@@ -59,7 +60,39 @@ public class ProductController {
 //			System.out.println(formProduct);
 			Product product = mapper.readValue(formProduct.toString(), Product.class);
 //			System.out.println(product);
+			product.setEffectiveDateTime(DateTime.stringtoDate(DateTime.ddsMMsyyyy() + " " +  DateTime.HHcmm(), "dd/MM/yyyy HH:mm"));
 			productService.save(product);
+			return product;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}	
+    }
+	
+	@RequestMapping(value = "/product/update.do", method = RequestMethod.POST)
+	@ResponseBody
+    public Product doUpdateProduct(@RequestBody JSONObject formProduct) {		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+//			System.out.println(formProduct);
+			Product product = mapper.readValue(formProduct.toString(), Product.class);
+//			System.out.println(product);
+			product.setEffectiveDateTime(DateTime.stringtoDate(DateTime.ddsMMsyyyy() + " " +  DateTime.HHcmm(), "dd/MM/yyyy HH:mm"));
+			productService.saveOrUpdate(product);
+			return product;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}	
+    }
+	
+	@RequestMapping(value = "/product/delete.do", method = RequestMethod.DELETE)
+	@ResponseBody
+    public Product doDeleteProduct(@RequestBody JSONObject formProduct) {		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Product product = mapper.readValue(formProduct.toString(), Product.class);
+			productService.delete(product);
 			return product;
 		} catch (Exception e) {
 			e.printStackTrace();

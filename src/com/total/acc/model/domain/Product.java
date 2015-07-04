@@ -4,12 +4,18 @@
 package com.total.acc.model.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.total.acc.util.JsonDateSerializer;
+
 
 /**
  * @author Sirimongkol
@@ -50,9 +56,37 @@ public class Product implements Serializable {
 	@Column(name = "STATUS")
 	private String status;
 	
+	@Column(name = "EFFECTIVE_DATETIME")
+	private Date effectiveDateTime;
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Product(int id, String productId, String productName,
+			String productTitle, String productDesc, float productPrice,
+			String imgSrc, String status, Date effectiveDateTime) {
+		super();
+		this.id = id;
+		this.productId = productId;
+		this.productName = productName;
+		this.productTitle = productTitle;
+		this.productDesc = productDesc;
+		this.productPrice = productPrice;
+		this.imgSrc = imgSrc;
+		this.status = status;
+		this.effectiveDateTime = effectiveDateTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", productId=" + productId
+				+ ", productName=" + productName + ", productTitle="
+				+ productTitle + ", productDesc=" + productDesc
+				+ ", productPrice=" + productPrice + ", imgSrc=" + imgSrc
+				+ ", status=" + status + ", effectiveDateTime="
+				+ effectiveDateTime + "]";
 	}
 
 	public int getId() {
@@ -119,32 +153,18 @@ public class Product implements Serializable {
 		this.status = status;
 	}
 
+	@JsonSerialize(using = JsonDateSerializer.class)
+	public Date getEffectiveDateTime() {
+		return effectiveDateTime;
+	}
+
+	public void setEffectiveDateTime(Date effectiveDateTime) {
+		this.effectiveDateTime = effectiveDateTime;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", productId=" + productId
-				+ ", productName=" + productName + ", productTitle="
-				+ productTitle + ", productDesc=" + productDesc
-				+ ", productPrice=" + productPrice + ", imgSrc=" + imgSrc
-				+ ", status=" + status + "]";
-	}
-
-	public Product(int id, String productId, String productName,
-			String productTitle, String productDesc, float productPrice,
-			String imgSrc, String status) {
-		super();
-		this.id = id;
-		this.productId = productId;
-		this.productName = productName;
-		this.productTitle = productTitle;
-		this.productDesc = productDesc;
-		this.productPrice = productPrice;
-		this.imgSrc = imgSrc;
-		this.status = status;
-	}
-	
 	
 }

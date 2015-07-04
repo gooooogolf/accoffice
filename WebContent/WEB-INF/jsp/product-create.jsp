@@ -72,7 +72,7 @@
                                             	</select>
 	                                        </div> 	 
 	                      				<button type="submit" class="btn btn-success" id="submit">Submit</button>
-                                        <button type="reset" class="btn btn-default" id="reset">Reset</button>                                        	                                         
+                                        <button type="reset" class="btn btn-danger" id="reset">Reset</button>                                        	                                         
 	                                    </form>   
 	                               	</div> 
 	                            	<div class="col-lg-6">
@@ -149,7 +149,9 @@ $(document).ready(function() {
     $('#submit').click(function(){
     	var formData = $('#productForm').serializeObject();
     	formData.imgSrc = $('#imgSrc').attr('src');
-    	saveProduct(JSON.stringify(formData));
+    	if (validate(formData)) {
+    		saveProduct(JSON.stringify(formData));
+    	}
     	return false;
     });
 });
@@ -163,8 +165,10 @@ function saveProduct(product) {
 	    contentType: "application/json",
 	    cache: false,
 	    success: function(retProduct) {
-	    	$('.panel-heading').text('ข้อมูลสินค้า Last Update ' + new Date());
-	    	setTimeout(function() { window.location = '${pageContext.request.contextPath}/product/list' }, 1500)
+	    	window.scroll(0, 0); 
+	    	alert('บันทึกข้อมูลสำเร็จ');
+	    	$('.panel-heading').text('ข้อมูลสินค้า Last Update ' + retProduct.effectiveDateTime);
+			window.location = '${pageContext.request.contextPath}/product/list';
 	    },
 	    error: function(jqXHR, textStatus, errorThrown) {
 	    	$('.panel-heading').text(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown);
@@ -188,6 +192,16 @@ $.fn.serializeObject = function() {
     });
     return o;
 };
+
+function validate(product) {
+	if (product.productId == '') {
+		$('.panel-heading').text('กรุณากรอกข้อมูลสินค้า');
+		window.scroll(0, 0); 
+		$('#productId').select();
+		return false;	
+	}
+	return true;
+}
 </script>
 </body>
 </html>
