@@ -15,6 +15,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fileupload/css/jquery.fileupload.css">
+<style type="text/css">
+.thumbnail img { width:150px; height:200px; }
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -38,8 +41,8 @@
 	                        </div>
 	                        <div class="panel-body">
 	                            <div class="row">
-	                                <div class="col-lg-6">
-	                                    <form role="form" action="javascript:void(0)" method="post" id="productForm">
+	                            <form role="form" action="javascript:void(0)" method="post" id="productForm">
+	                                <div class="col-lg-6">  
 	                                        <div class="form-group">
 	                                            <label>รหัสสินค้า</label>
 	                                            <input class="form-control" id="productId" name="productId">
@@ -55,25 +58,22 @@
 	                                    	<div class="form-group">
 	                                            <label>รายละเอียด</label>
 	                                            <textarea class="form-control" rows="5" id="productDesc" name="productDesc"></textarea>
-	                                            <p class="help-block">รายละเอียดข้อมูลสินค้า....</p>
+	                                            <p class="help-block">สามารถใช้ Code HTML เช่น &#60;a href="#"&#62;link Text&#60;/a&#62;  </p>
 	                                        </div>	                                       
-	                                      	<div class="form-group">
-	                                            <label>ราคา</label>
-	                                            <div class="form-group input-group">                                  		
-	                                            	<input type="text" class="form-control" id="productPrice" name="productPrice">
-	                                            	<span class="input-group-addon">.00</span>
-                                       			</div>
-	                                        </div>	
+<!-- 	                                      	<div class="form-group"> -->
+<!-- 	                                            <label>ราคา</label> -->
+<!-- 	                                            <div class="form-group input-group">                                  		 -->
+<!-- 	                                            	<input type="text" class="form-control" id="productPrice" name="productPrice"> -->
+<!-- 	                                            	<span class="input-group-addon">.00</span> -->
+<!--                                        			</div> -->
+<!-- 	                                        </div>	 -->
                                       		<div class="form-group">
 	                                            <label>สถานะ</label>
 	                                          	<select class="form-control" id="status" name="status">
 	                                                <option value="active">แสดง</option>
 	                                                <option value="terminated">ไม่แสดง</option>
                                             	</select>
-	                                        </div> 	 
-	                      				<button type="submit" class="btn btn-success" id="submit">Submit</button>
-                                        <button type="reset" class="btn btn-danger" id="reset">Reset</button>                                        	                                         
-	                                    </form>   
+	                                        </div> 	                                    	                                         	                                     
 	                               	</div> 
 	                            	<div class="col-lg-6">
 	                                        <div class="form-group">
@@ -95,8 +95,15 @@
 											    <!-- The container for the uploaded files -->
 											    <div id="files" class="files"></div>
 											    <br>
-	                                        </div>	                            	
+	                                        </div>                            
 	                               	</div> 
+	                               	<div class="col-lg-10">
+	                               		<div class="btn-group">
+	                      				<button type="submit" class="btn btn-success" id="submit">Submit</button>
+                                        <button type="reset" class="btn btn-danger" id="reset">Reset</button>    
+										</div>  
+	                               	</div>	                               	
+	                               	</form>  
 	                           	</div> 
 	                      	</div> 
 	              		</div>  

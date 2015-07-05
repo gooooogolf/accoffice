@@ -59,6 +59,15 @@ public class Product implements Serializable {
 	@Column(name = "EFFECTIVE_DATETIME")
 	private Date effectiveDateTime;
 
+	@Column(name = "DOWNLOAD_URL")
+	private String downloadURL;
+	
+	@Column(name = "DOWNLOAD_DESC", columnDefinition = "TEXT")
+	private String downloadDesc;
+	
+	@Column(name = "PRICE_DESC", columnDefinition = "TEXT")
+	private String priceDesc;
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -66,7 +75,8 @@ public class Product implements Serializable {
 
 	public Product(int id, String productId, String productName,
 			String productTitle, String productDesc, float productPrice,
-			String imgSrc, String status, Date effectiveDateTime) {
+			String imgSrc, String status, Date effectiveDateTime,
+			String downloadURL, String downloadDesc, String priceDesc) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -77,6 +87,9 @@ public class Product implements Serializable {
 		this.imgSrc = imgSrc;
 		this.status = status;
 		this.effectiveDateTime = effectiveDateTime;
+		this.downloadURL = downloadURL;
+		this.downloadDesc = downloadDesc;
+		this.priceDesc = priceDesc;
 	}
 
 	@Override
@@ -86,7 +99,9 @@ public class Product implements Serializable {
 				+ productTitle + ", productDesc=" + productDesc
 				+ ", productPrice=" + productPrice + ", imgSrc=" + imgSrc
 				+ ", status=" + status + ", effectiveDateTime="
-				+ effectiveDateTime + "]";
+				+ effectiveDateTime + ", downloadURL=" + downloadURL
+				+ ", downloadDesc=" + downloadDesc + ", priceDesc=" + priceDesc
+				+ "]";
 	}
 
 	public int getId() {
@@ -160,6 +175,30 @@ public class Product implements Serializable {
 
 	public void setEffectiveDateTime(Date effectiveDateTime) {
 		this.effectiveDateTime = effectiveDateTime;
+	}
+
+	public String getDownloadURL() {
+		return downloadURL;
+	}
+
+	public void setDownloadURL(String downloadURL) {
+		this.downloadURL = downloadURL;
+	}
+
+	public String getDownloadDesc() {
+		return downloadDesc;
+	}
+
+	public void setDownloadDesc(String downloadDesc) {
+		this.downloadDesc = downloadDesc;
+	}
+
+	public String getPriceDesc() {
+		return priceDesc;
+	}
+
+	public void setPriceDesc(String priceDesc) {
+		this.priceDesc = priceDesc;
 	}
 
 	public static long getSerialversionuid() {

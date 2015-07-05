@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,12 +10,15 @@
 <meta name="description" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="keywords" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="author" content="Sirimongkol Panwa">
-<title>หน้าหลัก accoffice</title>
+<title>ราคา accoffice</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/metisMenu/dist/metisMenu.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shop-homepage.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.css">
-
+<style type="text/css">
+.thumbnail img { width:150px; height:200px; }
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -25,44 +28,29 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">สินค้า</h1>
+                    <div class="col-lg-12">      
+                    <br>          
+                    <c:forEach items="${products}" var="product">
+	               		<div class="col-sm-12 col-lg-12 col-md-12">
+	                        <div class="thumbnail">
+	                        	<div class="col-sm-2 col-lg-2 col-md-2">
+	                        		<img class="thumbnail" src="${product.imgSrc }" alt="${product.productId }">
+	                        	</div>
+	                        	<div class="col-sm-10 col-lg-10 col-md-10">	 
+		                        	<div class="caption-full">
+		                        		<h4 class="pull-right">&#3647;${product.productPrice }</h4>
+		                                <h4><a href="#">${product.productId }</a></h4>
+		                                <p>${product.productName } <br> ${product.productTitle}</p>
+		                                <p>${product.priceDesc }</p> 	                         
+		                            </div>
+	                        	</div>	                          
+	                        </div>
+	                    </div>  
+	                </c:forEach>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                  		<div class="table-responsive">
-							<table class="table table-hover">
-								<thead>
-								<tr>
-									<th>รหัสสินค้า</th>
-									<th>ชื่อสินค้า</th>
-									<th>ราคา</th>
-									<th class="text-center">ปรับปรุง</th>
-								</tr>
-								<tbody>
-								<c:forEach items="${products}" var="product">
-									<tr>
-										<td>${product.productId }</td>
-										<td>${product.productName }</td>
-										<td>${product.productPrice }</td>
-										<td class="text-center">
-										<div class="btn-group">
-											<a href="${pageContext.request.contextPath}/product/update/${product.id }" class="btn btn-primary">สินค้า</a>
-											<a href="${pageContext.request.contextPath}/product/download/${product.id }" class="btn btn-info">Download</a>
-											<a href="${pageContext.request.contextPath}/product/price/${product.id }" class="btn btn-success">Price</a>
-										</div>
-										</td>
-									</tr>
-								</c:forEach>
-								</tbody>
-							</table>
-						</div>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>                
             </div>
             <!-- /.container-fluid -->
         </div>

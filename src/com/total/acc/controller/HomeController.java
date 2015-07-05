@@ -21,11 +21,21 @@ public class HomeController {
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping(value={"/", "/index", "/index.html"}, method = RequestMethod.GET)
-    public String home(Model model) {
+	@RequestMapping(value = {"/", "/index", "/index.html"}, method = RequestMethod.GET)
+    public String homePage(Model model) {
 		model.addAttribute("products", productService.findAll());
 		return "index";
     }
+	
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+    public String downloadPage(Model model) {
+		model.addAttribute("products", productService.findAll());
+		return "download";
+    }
     
-
+	@RequestMapping(value = "/price", method = RequestMethod.GET)
+    public String pricePage(Model model) {
+		model.addAttribute("products", productService.findAll());
+		return "price";
+    }
 }

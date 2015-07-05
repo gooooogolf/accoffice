@@ -16,7 +16,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shop-homepage.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.css">
-
+<style type="text/css">
+.thumbnail img { width:150px; height:200px; }
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -58,16 +60,17 @@
                     <c:forEach items="${products}" var="product">
 	               		<div class="col-sm-4 col-lg-4 col-md-4">
 	                        <div class="thumbnail">
-	                            <img width="150px" height="250px"  src="${product.imgSrc }" alt="${product.productId }">
+	                            <img class="thumbnail" src="${product.imgSrc }" alt="${product.productId }">
 	                            <div class="caption">
-	                                <h4 class="pull-right">&#3647;${product.productPrice }</h4>
+<%-- 	                                <h4 class="pull-right">&#3647;${product.productPrice }</h4> --%>
 	                                <h4><a href="#">${product.productId }</a>
 	                                </h4>
-	                                <p>${product.productName } <br> ${product.productDesc }</p>
+	                                <p>${product.productName } <br> ${product.productTitle}</p>
 	                            </div>
 	                            <div class="ratings">
 	                                <p class="pull-right">${product.effectiveDateTime }</p>
 	                                <p>
+<!-- 	                                <button>Download</button> -->
 	                                    <span class="glyphicon glyphicon-star"></span>
 	                                    <span class="glyphicon glyphicon-star"></span>
 	                                    <span class="glyphicon glyphicon-star"></span>

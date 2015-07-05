@@ -28,7 +28,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">แก้ไขสินค้า ${product.productId }</h1>
+                        <h1 class="page-header">Price ${product.productId }</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -41,77 +41,46 @@
 	                        </div>
 	                        <div class="panel-body">
 	                            <div class="row">
-	                            <form role="form" action="javascript:void(0)" method="post" id="productForm">
-	                                <div class="col-lg-6">   
-	                                        <div class="form-group">
-	                                            <label>รหัสสินค้า</label>
-	                                            <input class="form-control" id="productId" name="productId" value="${product.productId }">
-	                                            <input type="hidden" name="id" id="id" value="${product.id }">
-	                                        </div> 
-	                                   		<div class="form-group">
-	                                            <label>ชื่อสินค้า</label>
-	                                            <input class="form-control" id="productName" name="productName" value="${product.productName }">
-	                                        </div>   
-	                                     	<div class="form-group">
-	                                            <label>ข้อความ Title</label>
-	                                            <input class="form-control" id="productTitle" name="productTitle" value="${product.productTitle }">
-	                                        </div> 
-	                                    	<div class="form-group">
-	                                            <label>รายละเอียด</label>
-	                                            <textarea class="form-control" rows="5" id="productDesc" name="productDesc">${product.productDesc }</textarea>
-	                                            <p class="help-block">สามารถใช้ Code HTML เช่น &#60;a href="#"&#62;link Text&#60;/a&#62;  </p>
-	                                        </div>	                                       
-<!-- 	                                      	<div class="form-group"> -->
-<!-- 	                                            <label>ราคา</label> -->
-<!-- 	                                            <div class="form-group input-group">                                  		 -->
-<%-- 	                                            	<input type="text" class="form-control" id="productPrice" name="productPrice" value="${product.productPrice }"> --%>
-<!-- 	                                            	<span class="input-group-addon">.00</span> -->
-<!--                                        			</div> -->
-<!-- 	                                        </div>	 -->
-                                      		<div class="form-group">
-	                                            <label>สถานะ</label>
-	                                          	<select class="form-control" id="status" name="status">
-	                                                <option value="active">แสดง</option>
-	                                                <option value="terminated">ไม่แสดง</option>
-                                            	</select>
-	                                        </div> 	                                    
-	                               	</div> 
-	                            	<div class="col-lg-6">
+	                            <form role="form" action="javascript:void(0)" method="post" id="productForm">        
+	                            	<div class="col-lg-12">
 	                                        <div class="form-group">
 	                                            <label>รูปภาพ</label>
 											    <br>
-											    <!-- The fileinput-button span is used to style the file input field as button -->
-											    <span class="btn btn-success fileinput-button">
-											        <i class="glyphicon glyphicon-plus"></i>
-											        <span>Select files...</span>
-											        <!-- The file input field used as target for the file upload widget -->
-											        <input id="fileupload" type="file" name="file">
-											    </span>
-											    <br>
-											    <br>
-											    <!-- The global progress bar -->
-											    <div id="progress" class="progress">
-											        <div class="progress-bar progress-bar-success"></div>
-											    </div>
 											    <!-- The container for the uploaded files -->
 											    <div id="files" class="files">
 											    	<img id="imgSrc" class="img-responsive" src="${product.imgSrc }">
 											    </div>
 											    <br>
 	                                        </div>	
-	                                        <input type="hidden" class="form-control" id="downloadURL" name="downloadURL" value="${product.downloadURL }">
-	                                        <input type="hidden" class="form-control" id="productPrice" name="productPrice" value="${product.productPrice }">	 
-	                                        <textarea rows="1" cols="1" id="priceDesc" name="priceDesc" style="visibility: hidden;">${product.priceDesc }</textarea>
-	                                        <textarea rows="1" cols="1" id="downloadDesc" name="downloadDesc" style="visibility: hidden;">${product.downloadDesc }</textarea>                        	                             
+	                                       <div class="form-group">
+	                                            <label>ราคา &#3647;</label>
+	                                            <div class="form-group input-group">                                  		
+	                                            	<input type="text" class="form-control" id="productPrice" name="productPrice" value="${product.productPrice }">
+	                                            	<span class="input-group-addon">.00</span>
+                                       			</div>
+	                                        </div>	
+	                                        <div class="form-group">
+	                                            <label>รายละเอียด Price</label>
+	                                            <textarea class="form-control" rows="5" id="priceDesc" name="priceDesc">${product.priceDesc }</textarea>
+	                                            <p class="help-block">สามารถใช้ Code HTML เช่น &#60;a href="#"&#62;link Text&#60;/a&#62;  </p>
+	                                        </div>	
 	                               	</div> 
 	                               	<div class="col-lg-10">
 	                               		<div class="btn-group">
 		                      				<button type="submit" class="btn btn-primary" id="submit">Submit</button>
 		                      				<button type="reset" class="btn btn-warning" id="reset">Reset</button>    
-		                      				<button type="button" class="btn btn-danger" id="delete">Delete</button>   
+<!-- 		                      				<button type="button" class="btn btn-danger" id="delete">Delete</button>    -->
 											<button type="button" class="btn btn-info" id="back">Back</button>
 										</div>  
 	                               	</div>
+	                               	<input type="hidden" class="form-control" id="productId" name="productId" value="${product.productId }">
+	                                <input type="hidden" name="id" id="id" value="${product.id }">
+	                                <input type="hidden" class="form-control" id="productName" name="productName" value="${product.productName }">
+	                                <input type="hidden" class="form-control" id="productTitle" name="productTitle" value="${product.productTitle }">                             
+	                                <input type="hidden" class="form-control" id="status" name="status" value="${product.status }">
+	                                <input type="hidden" class="form-control" id="downloadURL" name="downloadURL" value="${product.downloadURL }">
+	                                <textarea rows="1" cols="1" id="productDesc" name="productDesc" style="visibility: hidden;">${product.productDesc }</textarea>	
+	                                <textarea rows="1" cols="1" id="downloadDesc" name="downloadDesc" style="visibility: hidden;">${product.downloadDesc }</textarea> 
 	                               	</form> 
 	                           	</div> 
 	                      	</div> 

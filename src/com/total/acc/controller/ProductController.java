@@ -52,6 +52,18 @@ public class ProductController {
 		return "product-update";
     }
 	
+	@RequestMapping(value = "/product/download/{id}", method = RequestMethod.GET)
+    public String updateDownloadProduct(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("product", productService.find(id));
+		return "product-download";
+    }
+	
+	@RequestMapping(value = "/product/price/{id}", method = RequestMethod.GET)
+    public String updatePriceProduct(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("product", productService.find(id));
+		return "product-price";
+    }
+	
 	@RequestMapping(value = "/product/create.do", method = RequestMethod.POST)
 	@ResponseBody
     public Product doCreateProduct(@RequestBody JSONObject formProduct) {		
