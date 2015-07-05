@@ -36,7 +36,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/price"><i class="fa fa-bitcoin fa-fw"></i> ราคา</a>
+                            <a href="${pageContext.request.contextPath}/price"><i class="fa fa-usd fa-fw"></i> ราคา</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/quataion"><i class="fa fa-edit fa-fw"></i> ขอใบเสนอราคา</a>

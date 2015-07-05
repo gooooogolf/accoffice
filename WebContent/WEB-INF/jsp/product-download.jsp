@@ -74,6 +74,7 @@
 	                                <input type="hidden" name="id" id="id" value="${product.id }">
 	                                <input type="hidden" class="form-control" id="productName" name="productName" value="${product.productName }">
 	                                <input type="hidden" class="form-control" id="productTitle" name="productTitle" value="${product.productTitle }">
+	                                <input type="hidden" class="form-control" id="productPrice" name="productPrice" value="${product.productPrice }">	
 	                                <input type="hidden" class="form-control" id="status" name="status" value="${product.status }">
 	                                <textarea rows="1" cols="1" id="productDesc" name="productDesc" style="visibility: hidden;">${product.productDesc }</textarea>	                      
 	                                <textarea rows="1" cols="1" id="priceDesc" name="priceDesc" style="visibility: hidden;">${product.priceDesc }</textarea>	                               	
