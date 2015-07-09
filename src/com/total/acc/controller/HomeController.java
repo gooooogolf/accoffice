@@ -38,4 +38,9 @@ public class HomeController {
 		model.addAttribute("products", productService.findAll());
 		return "price";
     }
+	
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+    public String contactPage(Model model) {
+		return "contact";
+    }
 }
