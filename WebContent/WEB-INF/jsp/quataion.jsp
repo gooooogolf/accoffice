@@ -10,7 +10,7 @@
 <meta name="description" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="keywords" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="author" content="Sirimongkol Panwa">
-<title>ราคา accoffice</title>
+<title>ขอใบเสนอราคา accoffice</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/metisMenu/dist/metisMenu.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css">
@@ -33,16 +33,18 @@
                     <c:forEach items="${products}" var="product">
 	               		<div class="col-sm-12 col-lg-12 col-md-12 thumbnail">
 <!-- 	                        <div class="thumbnail"> -->
-	                        	<div class="col-sm-2 col-lg-2 col-md-2">
-	                        	<br>
+	                        	<div class="col-sm-2 col-lg-2 col-md-2"><br>
 	                        		<img class="thumbnail" src="${product.imgSrc }" alt="${product.productId }">
 	                        	</div>
 	                        	<div class="col-sm-10 col-lg-10 col-md-10">	 
 		                        	<div class="caption-full">
-		                        		<h4 class="pull-right">&#3647;${product.productPrice }</h4>
+<%-- 		                        		<h4 class="pull-right">&#3647;${product.productPrice }</h4> --%>
 		                                <h4><a href="#">${product.productId }</a></h4>
 		                                <p>${product.productName } <br> ${product.productTitle}</p>
-		                                <p>${product.priceDesc }</p> 	                         
+		                                <p>${product.priceDesc }</p> 	
+		                                <p>
+		                                <a href="#" class="btn btn-info" target="_blank"><span class="fa fa-edit fa-fw"></span> ขอใบเสนอราคา</a>
+		                                </p>                         
 		                            </div>
 	                        	</div>	                          
 <!-- 	                        </div> -->

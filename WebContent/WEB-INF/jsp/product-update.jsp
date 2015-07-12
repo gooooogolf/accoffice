@@ -28,7 +28,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">แก้ไขสินค้า ${product.productId }</h1>
+                        <h1 class="page-header">สินค้า ${product.productId }</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -105,12 +105,12 @@
 	                                        <textarea rows="1" cols="1" id="downloadDesc" name="downloadDesc" style="visibility: hidden;">${product.downloadDesc }</textarea>                        	                             
 	                               	</div> 
 	                               	<div class="col-lg-10">
-	                               		<div class="btn-group">
+<!-- 	                               		<div class="btn-group"> -->
 		                      				<button type="submit" class="btn btn-primary" id="submit">Submit</button>
 		                      				<button type="reset" class="btn btn-warning" id="reset">Reset</button>    
 		                      				<button type="button" class="btn btn-danger" id="delete">Delete</button>   
-											<button type="button" class="btn btn-info" id="back">Back</button>
-										</div>  
+											<button type="button" class="btn btn-default" id="back">Back</button>
+<!-- 										</div>   -->
 	                               	</div>
 	                               	</form> 
 	                           	</div> 
@@ -195,7 +195,7 @@ function deleteProduct(product) {
 	    cache: false,
 	    success: function(retProduct) {
 	    	window.scroll(0, 0); 
-	    	alert('บันทึกข้อมูลสำเร็จ');
+	    	alert('ลบข้อมูลสำเร็จ');
 	    	$('.panel-heading').text('ข้อมูลสินค้า Last Update ' + retProduct.effectiveDateTime);
 			window.location = '${pageContext.request.contextPath}/product/list';
 	    },

@@ -24,13 +24,11 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">สินค้า</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
+                <!-- /.row --> 
+               <div class="row">
+               <br>
+            	<div class="col-lg-12" align="right"> <a href="${pageContext.request.contextPath}/product/update" class="btn btn-primary">เพิ่มสินค้าใหม่</a></div>
+               </div> 
                 <div class="row">
                     <div class="col-lg-12">
                   		<div class="table-responsive">
@@ -40,7 +38,7 @@
 									<th>รหัสสินค้า</th>
 									<th>ชื่อสินค้า</th>
 									<th>ราคา</th>
-									<th class="text-center">ปรับปรุง</th>
+									<th class="text-center"></th>
 								</tr>
 								<tbody>
 								<c:forEach items="${products}" var="product">
@@ -48,11 +46,11 @@
 										<td>${product.productId }</td>
 										<td>${product.productName }</td>
 										<td>${product.productPrice }</td>
-										<td class="text-center">
+										<td class="text-right">
 										<div class="btn-group">
-											<a href="${pageContext.request.contextPath}/product/update/${product.id }" class="btn btn-primary">สินค้า</a>
-											<a href="${pageContext.request.contextPath}/product/download/${product.id }" class="btn btn-info">Download</a>
-											<a href="${pageContext.request.contextPath}/product/price/${product.id }" class="btn btn-success">Price</a>
+											<a href="${pageContext.request.contextPath}/product/update/${product.id }" class="btn btn-primary"><i class="fa fa-shopping-cart fa-fw"></i></a>
+											<a href="${pageContext.request.contextPath}/product/download/${product.id }" class="btn btn-success"><i class="fa fa-download fa-fw"></i></a>
+											<a href="${pageContext.request.contextPath}/product/price/${product.id }" class="btn btn-info"><i class="fa fa-usd fa-fw"></i></a>
 										</div>
 										</td>
 									</tr>

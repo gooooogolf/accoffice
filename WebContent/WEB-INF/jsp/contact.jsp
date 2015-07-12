@@ -34,27 +34,27 @@
 			    <div class="col-lg-6">
 <!-- 			      <div class="well well-sm"><strong><i class="glyphicon glyphicon-ok form-control-feedback"></i> Required Field</strong></div> -->
 			      <div class="form-group">
-			        <label for="InputName">ชื่อของคุณ</label>
+			        <label for="contactName">ชื่อของคุณ</label>
 			        <div class="input-group">
-			          <input type="text" class="form-control" name="InputName" id="InputName" placeholder="ใส่ชื่อของคุณ" required>
+			          <input type="text" class="form-control" name="contactName" id="contactName" placeholder="ใส่ชื่อของคุณ" required>
 			          <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
 			      </div>
 			      <div class="form-group">
-			        <label for="InputEmail">อีเมลล์ของคุณ</label>
+			        <label for="contactEmail">อีเมล์ของคุณ</label>
 			        <div class="input-group">
-			          <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="ใส่อีเมลล์ของคุณ" required  >
+			          <input type="email" class="form-control" id="contactEmail" name="contactEmail" placeholder="ใส่อีเมล์ของคุณ" required  >
 			          <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
 			      </div>
 			      <div class="form-group">
-			        <label for="InputMessage">ข้อความ</label>
+			        <label for="contactMessage">ข้อความ</label>
 			        <div class="input-group">
-			          <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
+			          <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5" required></textarea>
 			          <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
 			      </div>
 			      <div class="form-group">
-			        <label for="InputReal" id="InputRealLabel">What is 4+3?</label>
+			        <label for="real" id="realLabel">What is 4+3?</label>
 			        <div class="input-group">
-			          <input type="text" class="form-control" name="InputReal" id="InputReal" required>
+			          <input type="text" class="form-control" name="real" id="real" required>
 			          <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
 			      </div>
 			      <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
@@ -63,16 +63,9 @@
 			  <hr class="featurette-divider hidden-lg">
 			  <div class="col-lg-5 col-md-push-1">
 			    <address>
-			    <h3>บริษัท โทเทิ่ล คอมมิวนิเคชั่น อินเตอร์เนชั่นแนล จำกัด </h3>
-			    <p class="lead">
-			    <a href="https://www.google.co.th/maps/place/%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%A9%E0%B8%B1%E0%B8%97+%E0%B9%82%E0%B8%97%E0%B9%80%E0%B8%97%E0%B8%B4%E0%B9%88%E0%B8%A5+%E0%B8%84%E0%B8%AD%E0%B8%A1%E0%B8%A1%E0%B8%B4%E0%B8%A7%E0%B8%99%E0%B8%B4%E0%B9%80%E0%B8%84%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99+%E0%B8%AD%E0%B8%B4%E0%B8%99%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%99%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99%E0%B9%81%E0%B8%99%E0%B8%A5+%E0%B8%88%E0%B8%B3%E0%B8%81%E0%B8%B1%E0%B8%94/@13.8058255,100.503947,13z/data=!4m5!1m2!2m1!1z4LmC4LiX4LmA4LiX4Li04LmI4LilIOC4hOC4reC4oeC4oeC4tOC4p-C4meC4tOC5gOC4hOC4iuC4seC5iOC4mSDguK3guLTguJnguYDguJXguK3guKPguYzguYDguJnguIrguLHguYjguJnguYHguJnguKU!3m1!1s0x30e29bbf7355698b:0x7c12d260f153c035" target="_blank">
-			    137/7 หมู่บ้านภาณุรังษี ซอย 3<br>
-			    	ถนนบางกรวย-ไทรน้อย<br>
-				ตำบล บางกรวย อำเภอ บางกรวย<br>
-				นนทบุรี 11130<br></a><br>
-			      Phone: +6629244698<br>
-			      Fax:  +6629244699<br>
-			      E-mail : total@accoffice.com</p>
+			    <h4>บริษัท โทเทิ่ล คอมมิวนิเคชั่น อินเตอร์เนชั่นแนล จำกัด </h4>
+<!-- 			    <p class="lead"> -->
+				<p>Phone: +6629244698<br>Fax:  +6629244699<br>E-mail : total@accoffice.com</p>
 			    </address>
 			  </div>
 			</div>
@@ -96,24 +89,71 @@ $(document).ready(function(){
 	var b = Math.floor((Math.random() * 10) + 1);
 
 	$('#alert-danger, #alert-success').hide();
-	$('#InputRealLabel').html('What is ' + a + ' + ' + b + '?');
+	$('#realLabel').html('What is ' + a + ' + ' + b + '?');
 	
 	$('#contactForm').submit(function(){
-		$InputReal = $('#InputReal');
-		if($InputReal.val() != (a + b)) {
+		$real = $('#real');
+		if($real.val() != (a + b)) {
 			$('#alert-danger, #alert-success').hide();
 			$('#alert-danger').text('เกิดข้อผิดพลาด! กรุณาใส่ข้อมูลให้ถูกต้อง').show();
-			$InputReal.select();
+			$real.select();
 			return false;
 		}
 		else {
 			$('#alert-danger, #alert-success').hide();
-			$('#alert-success').text('คุณส่งข้อมูลเรียบร้อยแล้ว').show();
+			var formData = $(this).serializeObject();
+			$.ajax({
+			    url: '${pageContext.request.contextPath}/mail/contact/send.do',
+			    data: JSON.stringify(formData),
+			    type: "POST",
+			    dataType:"json",
+			    contentType: "application/json",
+			    cache: false,
+			    beforeSend: function() {
+			    	$('#alert-success').text('กำลังส่งข้อมูล...').show();
+			    },
+			    success: function(isSend) {
+			    	$('#alert-danger, #alert-success').hide();
+			    	window.scroll(0, 0); 
+			    	if (isSend) {
+			    		$('#alert-success').text('คุณส่งข้อมูลเรียบร้อยแล้ว').show();
+			    		$(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+			    	}
+			    	else {
+			    		$('#alert-danger').text('เกิดข้อผิดพลาดในการส่งอีเมล์, กรุณาส่งอีกครั้ง').show();
+			    	}
+			    	a = Math.floor((Math.random() * 10) + 1);
+			    	b = Math.floor((Math.random() * 10) + 1);
+
+			    	$('#realLabel').html('What is ' + a + ' + ' + b + '?');
+			    	
+			    },
+			    error: function(jqXHR, textStatus, errorThrown) {
+			    	$('#alert-danger').text(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown).show();
+			    }
+			});	
+			
 			return false;
 		}
 		return;
 	});
 });
+
+$.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
 </script>
 </body>
 </html>

@@ -31,9 +31,10 @@
                     <div class="col-lg-12">      
                     <br>          
                     <c:forEach items="${products}" var="product">
-	               		<div class="col-sm-12 col-lg-12 col-md-12">
-	                        <div class="thumbnail">
+	               		<div class="col-sm-12 col-lg-12 col-md-12 thumbnail">
+<!-- 	                        <div class="thumbnail"> -->
 	                        	<div class="col-sm-2 col-lg-2 col-md-2">
+	                        	<br>
 	                        		<img class="thumbnail" src="${product.imgSrc }" alt="${product.productId }">
 	                        	</div>
 	                        	<div class="col-sm-10 col-lg-10 col-md-10">
@@ -45,7 +46,7 @@
 		                                <a href="${product.downloadURL}" class="btn btn-success" target="_blank"><span class="glyphicon glyphicon-download"></span> Download</a>
 		                                </p>		                         
 		                            </div>
-	                        	</div>	                          
+<!-- 	                        	</div>	                           -->
 	                        </div>
 	                    </div>  
 	                </c:forEach>

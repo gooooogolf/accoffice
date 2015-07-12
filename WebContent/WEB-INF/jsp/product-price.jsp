@@ -70,7 +70,7 @@
 		                      				<button type="submit" class="btn btn-primary" id="submit">Submit</button>
 		                      				<button type="reset" class="btn btn-warning" id="reset">Reset</button>    
 <!-- 		                      				<button type="button" class="btn btn-danger" id="delete">Delete</button>    -->
-											<button type="button" class="btn btn-info" id="back">Back</button>
+											<button type="button" class="btn btn-default" id="back">Back</button>
 										</div>  
 	                               	</div>
 	                               	<input type="hidden" class="form-control" id="productId" name="productId" value="${product.productId }">

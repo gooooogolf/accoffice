@@ -27,11 +27,17 @@
                                 <li>
                                     <a href="${pageContext.request.contextPath}/product/list">สินค้า</a>
                                 </li>
+<!--                                 <li> -->
+<%--                                     <a href="${pageContext.request.contextPath}/product/create">เพิ่มสินค้าใหม่</a> --%>
+<!--                                 </li> -->
+<!--                                 <li> -->
+<%--                                     <a href="${pageContext.request.contextPath}/product/update">แก้ไขสินค้า</a> --%>
+<!--                                 </li> -->
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/product/create">เพิ่มสินค้าใหม่</a>
+                                    <a href="${pageContext.request.contextPath}/question/list">ถามตอบ</a>
                                 </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/product/update">แก้ไขสินค้า</a>
+                               	<li>
+                                    <a href="${pageContext.request.contextPath}/vdo/list">VDO</a>
                                 </li>
                             </ul>
                         </li>
@@ -42,13 +48,13 @@
                             <a href="${pageContext.request.contextPath}/quataion"><i class="fa fa-edit fa-fw"></i> ขอใบเสนอราคา</a>
                         </li>  
                         <li>
-                            <a href="${pageContext.request.contextPath}/vedio"><i class="fa fa-video-camera fa-fw"></i> วิดีโอสอนการใช้งาน</a>
+                            <a href="${pageContext.request.contextPath}/video"><i class="fa fa-video-camera fa-fw"></i> วิดีโอสอนการใช้งาน</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/techniqe"><i class="fa fa-info-circle fa-fw"></i> เทคนิคการใช้งาน</a>
                         </li>  
                         <li>
-                            <a href="${pageContext.request.contextPath}/question"><i class="fa fa-question-circle fa-fw"></i> ถามตอบ</a>
+                            <a href="${pageContext.request.contextPath}/questions"><i class="fa fa-question-circle fa-fw"></i> ถามตอบ</a>
                         </li>  
                         <li>
                             <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-comments fa-fw"></i> ติดต่อเรา</a>
