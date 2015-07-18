@@ -3,6 +3,8 @@
  */
 package com.total.acc.controller;
 
+import java.util.List;
+
 import net.sf.json.JSONObject;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -29,6 +31,12 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
+	@RequestMapping(value = "/products", method = RequestMethod.GET)
+	@ResponseBody
+    public List<Product> getProducts() {
+		return productService.findAll();
+    }
+	
 	@RequestMapping(value = "/product/list", method = RequestMethod.GET)
     public String products(Model model) {
 		model.addAttribute("products", productService.findAll());

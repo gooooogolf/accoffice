@@ -39,11 +39,6 @@ public class HomeController {
 		return "price";
     }
 	
-	@RequestMapping(value = "/quataion", method = RequestMethod.GET)
-    public String quataionPage(Model model) {
-		model.addAttribute("products", productService.findAll());
-		return "quataion";
-    }
 	
 	@RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contactPage(Model model) {

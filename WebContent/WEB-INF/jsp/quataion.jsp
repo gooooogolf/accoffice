@@ -11,13 +11,16 @@
 <meta name="keywords" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="author" content="Sirimongkol Panwa">
 <title>ขอใบเสนอราคา accoffice</title>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/redmond/jquery-ui-1.9.2.custom.css"/> --%>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.css"/> --%>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ui.jqgrid.css"/> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/metisMenu/dist/metisMenu.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shop-homepage.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.css">
 <style type="text/css">
-.thumbnail img { width:150px; height:200px; }
+.thumbnail img { width:50px; height:100px; }
 </style>
 </head>
 <body>
@@ -27,32 +30,65 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">      
-                    <br>          
-                    <c:forEach items="${products}" var="product">
-	               		<div class="col-sm-12 col-lg-12 col-md-12 thumbnail">
-<!-- 	                        <div class="thumbnail"> -->
-	                        	<div class="col-sm-2 col-lg-2 col-md-2"><br>
-	                        		<img class="thumbnail" src="${product.imgSrc }" alt="${product.productId }">
-	                        	</div>
-	                        	<div class="col-sm-10 col-lg-10 col-md-10">	 
-		                        	<div class="caption-full">
-<%-- 		                        		<h4 class="pull-right">&#3647;${product.productPrice }</h4> --%>
-		                                <h4><a href="#">${product.productId }</a></h4>
-		                                <p>${product.productName } <br> ${product.productTitle}</p>
-		                                <p>${product.priceDesc }</p> 	
-		                                <p>
-		                                <a href="#" class="btn btn-info" target="_blank"><span class="fa fa-edit fa-fw"></span> ขอใบเสนอราคา</a>
-		                                </p>                         
-		                            </div>
-	                        	</div>	                          
-<!-- 	                        </div> -->
-	                    </div>  
-	                </c:forEach>
-                    </div>
+                <div class="row text-center">
+                <br>
+                <c:forEach items="${products}" var="product">
+		   			<div class="col-md-3 col-sm-6 hero-feature">
+		                <div class="thumbnail">
+<%-- 		                    <br><img src="${product.imgSrc }" alt="${product.productId }"> --%>
+		                    <div class="caption">
+		                        <h3>${product.productId }</h3>
+		                        <p>${product.productName }</p>
+		                    </div>
+		                    <div class="ratings">
+		                    	<p>
+		                            <a href="#" id="choose_${product.id }" class="btn btn-primary" onclick="javascript:chooseProduct('${product.id }', '${product.productName }')">เลือก</a> 
+<!-- 		                            <a href="#" class="btn btn-default">รายละเอียด</a> -->
+		                        </p>
+		                    </div>
+		                </div>
+		            </div>
+		       	</c:forEach>
                     <!-- /.col-lg-12 -->
                 </div>
+                <div class="row">
+				<form role="form" action="javascript:void(0)" method="post" id="quatationForm">
+				    <div class="col-lg-6">
+					      <div class="form-group">
+					        <label for="quatationName">ชื่อของคุณ</label>
+					        <div class="input-group">
+					          <input type="text" class="form-control" name="quatationName" id="quatationName" placeholder="ใส่ชื่อของคุณ" required>
+					          <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
+					      </div>
+					   	<div class="form-group">
+			        		<label for="contactEmail">อีเมล์ของคุณ</label>
+			        		<div class="input-group">
+			          		<input type="email" class="form-control" id="quatationEmail" name="quatationEmail" placeholder="ใส่อีเมล์ของคุณ" required  >
+			          		<span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
+			      		</div>
+			      		<div class="form-group">
+			      		  	<div class="panel panel-default">
+		                        <div class="panel-heading">รายการสินค้า</div>
+		                        <div class="panel-body">
+		                        	<table id="tblProducts" class="table table-hover">
+<!-- 		                        		<thead> -->
+<!-- 		                        		<tr> -->
+<!-- 		                        		<th>สินค้า</th> -->
+<!-- 		                        		<th style="width:5%;">จำนวน</th> -->
+<!-- 		                        		</tr> -->
+<!-- 		                        		</thead> -->
+		                        		<tbody id="tbodyProducts">
+		                        		</tbody>
+		                        	</table>
+		                        </div>
+	                        </div>
+			      		</div>
+			      		<div>
+			      		<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+			      		</div>
+					</div>					
+				</form>
+				</div>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
@@ -63,9 +99,60 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery/jquery.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.js"></script> --%>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jqGrid/i18n/grid.locale-en.js"></script> --%>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jqGrid/jquery.jqGrid.min.js"></script> --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/metisMenu/dist/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
 <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.js"></script>
+<script type="text/javascript">
+var __ids = [], productIds = {};
+var trProductTemplate = '<tr id="trProduct{productId}"><td>{productName}</td><td><input type="text" id="txtProduct{productId}" class="form-control" size="2" maxlength="2" value="1"/></td></tr>'
+$(document).ready(function(){
+	
+	$('#quatationForm').submit(function(){
+		var quatation = {
+				quatationEmail: $('#quatationEmail').val(),
+				quatationName: $('#quatationName').val(),
+				products: getProductItems(productIds)
+		}
+		
+		alert(JSON.stringify(quatation));
+	});
+	
+});
+
+function getProductItems(json) {
+	var products = [], product; 
+    for(var prop in json) {
+    	product = {};
+    	product.id = json[prop]
+    	product.quantity = $('#txtProduct' + product.id).val();
+    	products.push(product);
+    }
+    return products;
+}
+
+function chooseProduct(id, productName) {
+	if (productIds[id]) {
+		delete productIds[id];
+		$('#choose_' + id).text('เลือก').removeClass('btn btn-success').addClass('btn btn-primary');
+		$('#trProduct' + id).remove();
+	}
+	else {
+		productIds[id] = id;
+		$('#choose_' + id).text('เลือกแล้ว').addClass('btn btn-success');
+		var productId = new RegExp('{productId}', 'g');
+		var trProduct = trProductTemplate; 	
+		trProduct = trProduct.replace(productId, id);
+		trProduct = trProduct.replace('{productName}', productName);
+		$('#tbodyProducts').append(trProduct);
+		$('#txtProduct' + id).select();
+	}
+	
+}
+
+</script>
 </body>
 </html>
