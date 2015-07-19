@@ -118,7 +118,24 @@ $(document).ready(function(){
 				products: getProductItems(productIds)
 		}
 		
-		alert(JSON.stringify(quatation));
+		$.ajax({
+		    url: '${pageContext.request.contextPath}/quatation/contact/send.do',
+		    data: JSON.stringify(quatation),
+		    type: "POST",
+		    dataType:"json",
+		    contentType: "application/json",
+		    cache: false,
+		    beforeSend: function() {
+// 		    	$('#alert-success').text('กำลังส่งข้อมูล...').show();
+		    },
+		    success: function(isSend) {
+		    	$('#alert-danger, #alert-success').hide();
+		    	window.scroll(0, 0); 	    	
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		    	alert(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown).show();
+		    }
+		});	
 	});
 	
 });
