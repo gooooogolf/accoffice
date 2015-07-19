@@ -65,7 +65,6 @@ public class MailUtil {
 	}
 
 	public static boolean sendFromGMail(String from, String pass, String[] to, String subject, String body) {
-		//cmnldpnwmrzlrzvg
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
