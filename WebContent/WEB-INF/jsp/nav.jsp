@@ -45,7 +45,7 @@
                             <a href="${pageContext.request.contextPath}/price"><i class="fa fa-usd fa-fw"></i> ราคา</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/quatation"><i class="fa fa-edit fa-fw"></i> ขอใบเสนอราคา</a>
+                            <a href="${pageContext.request.contextPath}/quotation"><i class="fa fa-edit fa-fw"></i> ขอใบเสนอราคา</a>
                         </li>  
                         <li>
                             <a href="${pageContext.request.contextPath}/video"><i class="fa fa-video-camera fa-fw"></i> วิดีโอสอนการใช้งาน</a>

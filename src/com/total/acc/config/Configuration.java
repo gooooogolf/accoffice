@@ -18,6 +18,7 @@ public class Configuration {
 	public static final String MAIL;
 	public static final String MAIL_USER;
 	public static final String MAIL_PASSWORD;
+	public static final String TEMPLATE_JASPERREPORT_CONTEXTPATH;
 	
 	static {
 		
@@ -40,6 +41,7 @@ public class Configuration {
 		MAIL = prop.getProperty("mail");
 		MAIL_USER = prop.getProperty("mail.user");
 		MAIL_PASSWORD = prop.getProperty("mail.password");
+		TEMPLATE_JASPERREPORT_CONTEXTPATH = prop.getProperty("jasper.contextPath");
 
 	}
 

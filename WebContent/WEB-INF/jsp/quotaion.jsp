@@ -52,18 +52,18 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">
-				<form role="form" action="javascript:void(0)" method="post" id="quatationForm">
+				<form role="form" action="javascript:void(0)" method="post" id="quotationForm">
 				    <div class="col-lg-6">
 					      <div class="form-group">
-					        <label for="quatationName">ชื่อของคุณ</label>
+					        <label for="quotationName">ชื่อของคุณ</label>
 					        <div class="input-group">
-					          <input type="text" class="form-control" name="quatationName" id="quatationName" placeholder="ใส่ชื่อของคุณ" required>
+					          <input type="text" class="form-control" name="quotationName" id="quotationName" placeholder="ใส่ชื่อของคุณ" required>
 					          <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
 					      </div>
 					   	<div class="form-group">
 			        		<label for="contactEmail">อีเมล์ของคุณ</label>
 			        		<div class="input-group">
-			          		<input type="email" class="form-control" id="quatationEmail" name="quatationEmail" placeholder="ใส่อีเมล์ของคุณ" required  >
+			          		<input type="email" class="form-control" id="quotationEmail" name="quotationEmail" placeholder="ใส่อีเมล์ของคุณ" required  >
 			          		<span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
 			      		</div>
 			      		<div class="form-group">
@@ -111,16 +111,16 @@ var __ids = [], productIds = {};
 var trProductTemplate = '<tr id="trProduct{productId}"><td>{productName}</td><td><input type="text" id="txtProduct{productId}" class="form-control" size="2" maxlength="2" value="1"/></td></tr>'
 $(document).ready(function(){
 	
-	$('#quatationForm').submit(function(){
-		var quatation = {
-				quatationEmail: $('#quatationEmail').val(),
-				quatationName: $('#quatationName').val(),
+	$('#quotationForm').submit(function(){
+		var quotation = {
+				quotationEmail: $('#quotationEmail').val(),
+				quotationName: $('#quotationName').val(),
 				products: getProductItems(productIds)
 		}
 		
 		$.ajax({
-		    url: '${pageContext.request.contextPath}/quatation/contact/send.do',
-		    data: JSON.stringify(quatation),
+		    url: '${pageContext.request.contextPath}/quotation/contact/send.do',
+		    data: JSON.stringify(quotation),
 		    type: "POST",
 		    dataType:"json",
 		    contentType: "application/json",
