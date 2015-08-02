@@ -72,25 +72,6 @@ $(document).ready(function() {
 
 });
 
-function deleteQuestion(id, seq) {
-	if (confirm('คุณต้องการลบ Q' + seq + '?')) {
-		$.ajax({
-		    url: '${pageContext.request.contextPath}/question/delete.do?id=' + id,
-		    type: "DELETE",
-		    dataType:"json",
-		    cache: false,
-		    success: function(retProduct) {
-		    	window.scroll(0, 0); 
-		    	alert('ลบข้อมูลสำเร็จ');
-				window.location = '${pageContext.request.contextPath}/question/list';
-		    },
-		    error: function(jqXHR, textStatus, errorThrown) {
-		    	$('.panel-heading').text(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown);
-		    }
-		});	
-	}
-	return false;
-}
 </script>
 </body>
 </html>
