@@ -39,6 +39,9 @@
                                	<li>
                                     <a href="${pageContext.request.contextPath}/vdo/list">VDO</a>
                                 </li>
+                              	<li>
+                                    <a href="${pageContext.request.contextPath}/tech/list">เทคนิคการใช้งาน</a>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -51,7 +54,7 @@
                             <a href="${pageContext.request.contextPath}/video"><i class="fa fa-video-camera fa-fw"></i> วิดีโอสอนการใช้งาน</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/techniqe"><i class="fa fa-info-circle fa-fw"></i> เทคนิคการใช้งาน</a>
+                            <a href="${pageContext.request.contextPath}/technique"><i class="fa fa-info-circle fa-fw"></i> เทคนิคการใช้งาน</a>
                         </li>  
                         <li>
                             <a href="${pageContext.request.contextPath}/questions"><i class="fa fa-question-circle fa-fw"></i> ถามตอบ</a>

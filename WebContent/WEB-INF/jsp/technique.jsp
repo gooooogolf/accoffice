@@ -10,7 +10,7 @@
 <meta name="description" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="keywords" content="โปรแกรมพิมพ์บิล, โปรแกรมบัญชีสำเร็จรูป, โปรแกรมขายหน้าร้าน POS, โปรแกรมห้องพัก-คอนโด, โปรแกรมพิมพ์ฟอร์มภาษี">
 <meta name="author" content="Sirimongkol Panwa">
-<title>VDO</title>
+<title>Technique</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/metisMenu/dist/metisMenu.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css">
@@ -27,9 +27,9 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
-            	<div class="row">
-            		<br> <div class="col-lg-12" align="right"> <a href="${pageContext.request.contextPath}/vdo/update" class="btn btn-primary">เพิ่ม VDO</a></div>
-                </div> 
+<!--             	<div class="row"> -->
+<%--             		<br> <div class="col-lg-12" align="right"> <a href="${pageContext.request.contextPath}/vdo/update" class="btn btn-primary">เพิ่ม VDO</a></div> --%>
+<!--                 </div>  -->
               	<div class="row">
                     <div class="col-lg-12">      
                     <br>          
@@ -41,9 +41,9 @@
                         	<div class="col-sm-10 col-lg-10 col-md-10">	 
 	                        	<div class="caption-full">
 	                                <h4>${productMap.value.productId }</h4>
-	                                <c:forEach items="${videos}" var="video">
-	                                	<c:if test="${productMap.value.id == video.productId}"> 
-	                                		<p><a href="${pageContext.request.contextPath}/vdo/update/${video.id}" title="แก้ไข/อัพเดต">${video.videoSeq }. ${video.videoName }</a></p> 
+	                                <c:forEach items="${techniques}" var="tech">
+	                                	<c:if test="${productMap.value.id == tech.productId}"> 
+	                                		<p><a href="${pageContext.request.contextPath}/tech/view/${video.id}" title="ดู VDO">${tech.techSeq }. ${tech.techName }</a></p> 
 	                                	</c:if>	
 	                                </c:forEach>                  
 	                            </div>

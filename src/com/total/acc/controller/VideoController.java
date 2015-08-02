@@ -80,13 +80,6 @@ public class VideoController {
 		return "video-update";
     }
 	
-	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public String viewVideo(@PathVariable("id") Integer id, Model model) {
-		Video video = videoService.find(id);
-		model.addAttribute("video", video);
-		model.addAttribute("product", productService.find(Integer.parseInt(video.getProductId())));
-		return "video-view";
-    }
 	
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -100,5 +93,13 @@ public class VideoController {
 			e.printStackTrace();
 			return null;
 		}	
+    }
+	
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String viewVideo(@PathVariable("id") Integer id, Model model) {
+		Video video = videoService.find(id);
+		model.addAttribute("video", video);
+		model.addAttribute("product", productService.find(Integer.parseInt(video.getProductId())));
+		return "video-view";
     }
 }
