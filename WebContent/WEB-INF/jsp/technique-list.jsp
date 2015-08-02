@@ -43,7 +43,7 @@
 	                                <h4>${productMap.value.productId }</h4>
 	                                <c:forEach items="${techniques}" var="tech">
 	                                	<c:if test="${productMap.value.id == tech.productId}"> 
-	                                		<p><a href="${pageContext.request.contextPath}/technique/update/${tech.id}" title="แก้ไข/อัพเดต">${tech.techSeq }. ${tech.techName }</a></p> 
+	                                		<p><a href="${pageContext.request.contextPath}/tech/update/${tech.id}" title="แก้ไข/อัพเดต">${tech.techSeq }. ${tech.techName }</a></p> 
 	                                	</c:if>	
 	                                </c:forEach>                  
 	                            </div>

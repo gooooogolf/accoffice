@@ -43,7 +43,7 @@
 	                                <h4>${productMap.value.productId }</h4>
 	                                <c:forEach items="${videos}" var="video">
 	                                	<c:if test="${productMap.value.id == video.productId}"> 
-	                                		<p><a href="${pageContext.request.contextPath}/vdo/view/${video.id}" title="ดู VDO">${video.videoSeq }. ${video.videoName }</a></p> 
+	                                		<p><a href="${pageContext.request.contextPath}/video/view/${video.id}" title="ดู VDO">${video.videoSeq }. ${video.videoName }</a></p> 
 	                                	</c:if>	
 	                                </c:forEach>                  
 	                            </div>
