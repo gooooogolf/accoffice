@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page session="false"%>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -9,8 +11,19 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="${pageContext.request.contextPath}">ACC OFFICE</a>
+
             </div>
-            
+          		<ul class="nav navbar-top-links navbar-right">
+			        <li class="dropdown">
+			            <a href="#" data-toggle="dropdown" class="dropdown-toggle">${pageContext.response.locale}<b class="caret"></b></a>
+			            <ul class="dropdown-menu">
+			                <li><a href="?lang=th">ภาษาไทย</a></li>
+			                <li><a href="?lang=en">English</a></li>
+<!-- 			                <li class="divider"></li> -->
+<%-- 			                <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">ออกจากระบบ</a></li> --%>
+			            </ul>
+			        </li>
+				</ul>
             <!-- /.navbar-header -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -19,7 +32,7 @@
                             <a href="${pageContext.request.contextPath}/index"><i class="fa fa-home fa-fw"></i> หน้าหลัก</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/download"><i class="fa fa-download fa-fw"></i> Download</a>
+                            <a href="${pageContext.request.contextPath}/download"><i class="fa fa-download fa-fw"></i> <spring:message code="label.download" /></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> รายการปรับปรุง<span class="fa arrow"></span></a>
