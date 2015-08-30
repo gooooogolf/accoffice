@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page session="false"%>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/respond.js"></script>
+<![endif]-->
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
