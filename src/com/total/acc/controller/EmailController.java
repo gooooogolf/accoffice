@@ -29,8 +29,8 @@ public class EmailController {
 //			System.out.println(formContact);
 			String body =  formContact.getString("contactMessage");
 			body += "\n\n" + formContact.getString("contactEmail");
-			String[] to = {Configuration.MAIL};
-			return MailUtil.sendFromGMail(Configuration.MAIL_USER, Configuration.MAIL_PASSWORD, to , "คุณ" + formContact.getString("contactName") + " ทำการติดต่อเรา", body);
+			String[] to = {formContact.getString("contactEmail"), Configuration.MAIL_RETURN};
+			return MailUtil.sendFromHostMail(Configuration.MAIL_HOST, Configuration.MAIL_PORT, Configuration.MAIL_USER, Configuration.MAIL_PASSWORD,  to , "คุณ" + formContact.getString("contactName") + " ทำการติดต่อเรา", body);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

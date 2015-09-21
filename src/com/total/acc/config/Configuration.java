@@ -15,9 +15,11 @@ import java.util.Properties;
 public class Configuration {
 	
 	public static final String VERSION;
-	public static final String MAIL;
+	public static final String MAIL_RETURN;
+	public static final String MAIL_HOST;
 	public static final String MAIL_USER;
 	public static final String MAIL_PASSWORD;
+	public static final String MAIL_PORT;
 	public static final String TEMPLATE_JASPERREPORT_CONTEXTPATH;
 	
 	static {
@@ -38,9 +40,11 @@ public class Configuration {
 		}
 		
 		VERSION =  prop.getProperty("version");		
-		MAIL = prop.getProperty("mail");
+		MAIL_RETURN = prop.getProperty("mail.return");
+		MAIL_HOST = prop.getProperty("mail.host");
 		MAIL_USER = prop.getProperty("mail.user");
 		MAIL_PASSWORD = prop.getProperty("mail.password");
+		MAIL_PORT  = prop.getProperty("mail.port");
 		TEMPLATE_JASPERREPORT_CONTEXTPATH = prop.getProperty("jasper.contextPath");
 
 	}

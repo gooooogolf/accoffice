@@ -114,11 +114,12 @@ public class QuotationController {
 			      e.printStackTrace();
 			    }
 			    
-		        String host = "smtp.gmail.com";
-		        String port = "587";
+		        String host = Configuration.MAIL_HOST;
+		        String port = Configuration.MAIL_PORT;
 		        String userName = Configuration.MAIL_USER;
 		        String password  = Configuration.MAIL_PASSWORD;
-		        String toAddress = quotationContactEmail;
+//		        String toAddress = quotationContactEmail;
+		        String[] toAddress = {quotationContactEmail, Configuration.MAIL_RETURN};
 		        String subject = "ใบเสนอราคา TOTAL COMMUNICATION INTERNATIONAL CO., LTD";
 		        String message = "เรียน คุณ" + quotationContactName + "<br> ใบเสนอราคาเลขที่ " + quotationId;
 		        String[] attachFiles = new String[1];
