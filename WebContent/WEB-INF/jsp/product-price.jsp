@@ -236,7 +236,7 @@ function getImage(id) {
 	    success: function(uploadFile) {
 	    	if (uploadFile) {
 // 		    	$('#files').html('<div id="imgTemp"><a href="${pageContext.request.contextPath}/resources/temp/' + uploadFile.url + '" target="_blank">' + uploadFile.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
-		     	$('#files').html('<img id="imgSrc" class="img-responsive" src="${pageContext.request.contextPath}/resources/temp/' + uploadFile.url + '">');
+		     	$('#files').html('<img id="imgSrc" class="img-responsive" src="' + uploadFile.url + '">');
 		     	$('#files').append('<input type="hidden" id="fileId" value="' + id + '">');
 		     	$('#progress').hide();
 	    	}

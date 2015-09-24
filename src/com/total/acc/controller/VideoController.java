@@ -4,11 +4,14 @@
 package com.total.acc.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
@@ -24,12 +27,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.total.acc.config.Configuration;
 import com.total.acc.model.domain.Product;
 import com.total.acc.model.domain.UploadFile;
 import com.total.acc.model.domain.Video;
 import com.total.acc.model.service.ProductService;
 import com.total.acc.model.service.UploadFileService;
 import com.total.acc.model.service.VideoService;
+import com.total.acc.util.FTPUploader;
 
 /**
  * @author Sirimongkol
@@ -135,21 +140,32 @@ public class VideoController {
     }
 	
     public String getImage(HttpServletRequest request, @RequestParam("id") int id) {
-		ServletContext servletContext = request.getSession().getServletContext();
 		String basePath = request.getContextPath() + "/resources/temp"; 
-		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
 		UploadFile uploadFile = uploadFileService.find(id);
 		if (uploadFile != null) {	
 			  try {
-				  File file = new File(uploadFolder + "/" + uploadFile.getName());
-				  if (!file.exists()) {
-//					  System.out.println("file is not exits!!");
+				    File file = new File(uploadFile.getUrl());
+					if (!file.exists()) {
 					  file.createNewFile(); 
-				  }
-				  FileOutputStream fos = new FileOutputStream(file); 
-				  fos.write(uploadFile.getImage());
-				  fos.close();
-				  return basePath + "/" +  uploadFile.getName();
+					  FileOutputStream fos = new FileOutputStream(file); 
+					  fos.write(uploadFile.getImage());
+					  fos.close();
+					}
+					
+					String filePath = request.getScheme() + "://" + Configuration.FTP_HOST + "/temp/" + uploadFile.getUrl();
+					URL url = new URL (filePath);
+					URLConnection connection = url.openConnection();
+					connection.connect(); 
+					HttpURLConnection httpConnection = (HttpURLConnection) connection;
+					int code = httpConnection.getResponseCode();
+					if (code != 200) {
+						FTPUploader ftpUploader = new FTPUploader(Configuration.FTP_HOST, Configuration.FTP_USERNAME, Configuration.FTP_PASSWORD);
+					    FileInputStream fileInputStream = new FileInputStream(file);
+						ftpUploader.uploadFileWithStream(fileInputStream, "httpdocs/temp/" + uploadFile.getUrl());
+						ftpUploader.disconnect();
+					}
+					httpConnection.disconnect();
+					return filePath;
 		        }catch(Exception e){
 		            e.printStackTrace();
 		            return basePath + "/none.jpg";
@@ -157,4 +173,28 @@ public class VideoController {
 		}
 		return basePath + "/none.jpg";
     }
+    
+//    public String getImage(HttpServletRequest request, @RequestParam("id") int id) {
+//		ServletContext servletContext = request.getSession().getServletContext();
+//		String basePath = request.getContextPath() + "/resources/temp"; 
+//		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
+//		UploadFile uploadFile = uploadFileService.find(id);
+//		if (uploadFile != null) {	
+//			  try {
+//				  File file = new File(uploadFolder + "/" + uploadFile.getName());
+//				  if (!file.exists()) {
+////					  System.out.println("file is not exits!!");
+//					  file.createNewFile(); 
+//				  }
+//				  FileOutputStream fos = new FileOutputStream(file); 
+//				  fos.write(uploadFile.getImage());
+//				  fos.close();
+//				  return basePath + "/" +  uploadFile.getName();
+//		        }catch(Exception e){
+//		            e.printStackTrace();
+//		            return basePath + "/none.jpg";
+//		        }
+//		}
+//		return basePath + "/none.jpg";
+//    }
 }

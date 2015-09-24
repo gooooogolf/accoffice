@@ -34,7 +34,27 @@ public class FTPUploader {
 		ftp.enterLocalPassiveMode();
 	}
 	
+	public boolean checkDirectoryExists(String dirPath) throws IOException {
+		this.ftp.changeWorkingDirectory(dirPath);
+	    int returnCode = this.ftp.getReplyCode();
+	    if (returnCode == 550) {
+	        return false;
+	    }
+	    return true;
+	}
 	
+	public boolean checkFileExists(String filePath) throws IOException {
+		System.out.println(filePath);
+	    InputStream inputStream = this.ftp.retrieveFileStream(filePath);
+	    int returnCode = this.ftp.getReplyCode();
+	    System.out.println(returnCode);
+	    if (inputStream == null || returnCode == 550) {
+	    	System.out.println(false);
+	        return false;
+	    }
+	    System.out.println(true);
+	    return true;
+	}
 	
 	public void uploadFile(String localFileFullName, String fileName,
 			String hostDir) throws Exception {

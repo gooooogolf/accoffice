@@ -1,7 +1,11 @@
 package com.total.acc.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.total.acc.config.Configuration;
 import com.total.acc.model.domain.UploadFile;
 import com.total.acc.model.service.UploadFileService;
 import com.total.acc.util.DateTime;
+import com.total.acc.util.FTPUploader;
 
 @Controller
 @RequestMapping("/upload")
@@ -80,19 +86,48 @@ public class UploadController {
 	@RequestMapping(value="/getImage", method=RequestMethod.GET)
 	@ResponseBody
     public UploadFile getImage(HttpServletRequest request, @RequestParam("id") int id) {
-		ServletContext servletContext = request.getSession().getServletContext();
-		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
+//		ServletContext servletContext = request.getSession().getServletContext();
+//		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
 		UploadFile uploadFile = uploadFileService.find(id);
 		if (uploadFile != null) {
-			  try{
-				  File file = new File(uploadFolder + "/" + uploadFile.getName());
-				  if (!file.exists()) {
+//			  try{
+//				  File file = new File(uploadFolder + "/" + uploadFile.getName());
+//				  if (!file.exists()) {
+//					  file.createNewFile(); 
+//				  }
+//				  FileOutputStream fos = new FileOutputStream(file); 
+//				  fos.write(uploadFile.getImage());
+//				  fos.close();
+//				  return uploadFile;
+//		        }catch(Exception e){
+//		            e.printStackTrace();
+//		            return null;
+//		        }
+			
+			  try {
+				    File file = new File(uploadFile.getUrl());
+					if (!file.exists()) {
 					  file.createNewFile(); 
-				  }
-				  FileOutputStream fos = new FileOutputStream(file); 
-				  fos.write(uploadFile.getImage());
-				  fos.close();
-				  return uploadFile;
+					  FileOutputStream fos = new FileOutputStream(file); 
+					  fos.write(uploadFile.getImage());
+					  fos.close();
+					}
+					
+					String filePath = request.getScheme() + "://" + Configuration.FTP_HOST + "/temp/" + uploadFile.getUrl();
+					URL url = new URL (filePath);
+					URLConnection connection = url.openConnection();
+					connection.connect(); 
+					HttpURLConnection httpConnection = (HttpURLConnection) connection;
+					int code = httpConnection.getResponseCode();
+					if (code != 200) {
+						FTPUploader ftpUploader = new FTPUploader(Configuration.FTP_HOST, Configuration.FTP_USERNAME, Configuration.FTP_PASSWORD);
+					    FileInputStream fileInputStream = new FileInputStream(file);
+						ftpUploader.uploadFileWithStream(fileInputStream, "httpdocs/temp/" + uploadFile.getUrl());
+						ftpUploader.disconnect();
+					}
+					httpConnection.disconnect();					
+					uploadFile.setUrl(filePath);
+					return uploadFile;
 		        }catch(Exception e){
 		            e.printStackTrace();
 		            return null;
@@ -101,4 +136,5 @@ public class UploadController {
 //		return "none.jpg";
 		return null;
     }
+	
 }

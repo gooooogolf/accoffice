@@ -19,7 +19,7 @@ public class FTPTest {
 					com.total.acc.config.Configuration.FTP_USERNAME,
 					com.total.acc.config.Configuration.FTP_PASSWORD);
 
-			ftpUploader.uploadFileWithStream(in, "report.jpg");
+			ftpUploader.uploadFileWithStream(in, "httpdocs/temp/report.jpg");
 			ftpUploader.disconnect();
 		} finally {
 			if (in != null) {
