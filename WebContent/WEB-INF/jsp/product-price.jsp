@@ -116,6 +116,7 @@ $(document).ready(function() {
             $.each(data.result, function (index, file) {
              	$('#files').html('<div id="imgTemp"><a href="${pageContext.request.contextPath}/resources/temp/' + file.url + '" target="_blank">' + file.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
              	$('#files').append('<img id="imgSrc" class="img-responsive" src="${pageContext.request.contextPath}/resources/temp/' + file.url + '">');
+             	$('#files').append('<input type="hidden" id="fileId" value="' + file.id + '">');
             });
             $('#progress').hide();
         },
@@ -133,7 +134,8 @@ $(document).ready(function() {
     
     $('#submit').click(function(){
     	var formData = $('#productForm').serializeObject();
-    	formData.imgSrc = $('#imgSrc').attr('src');
+//     	formData.imgSrc = $('#imgSrc').attr('src');
+		formData.imgSrc = $('#fileId').val();
     	if (validate(formData)) {
     		saveOrUpdateProduct(JSON.stringify(formData));
     	}
@@ -152,6 +154,8 @@ $(document).ready(function() {
     	}
     	return false;
     })
+    
+    getImage('${product.imgSrc }');
 });
 
 function deleteProduct(product) {
@@ -220,6 +224,30 @@ function validate(product) {
 		return false;	
 	}
 	return true;
+}
+
+function getImage(id) {
+	$.ajax({
+	    url: '${pageContext.request.contextPath}/upload/getImage?id=' + id,
+	    type: "GET",
+	    dataType:"json",
+	    contentType: "application/json",
+	    cache: false,
+	    success: function(uploadFile) {
+	    	if (uploadFile) {
+// 		    	$('#files').html('<div id="imgTemp"><a href="${pageContext.request.contextPath}/resources/temp/' + uploadFile.url + '" target="_blank">' + uploadFile.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
+		     	$('#files').html('<img id="imgSrc" class="img-responsive" src="${pageContext.request.contextPath}/resources/temp/' + uploadFile.url + '">');
+		     	$('#files').append('<input type="hidden" id="fileId" value="' + id + '">');
+		     	$('#progress').hide();
+	    	}
+
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+	    	$('.panel-heading').text(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown);
+	    }
+	});	
+	return false;
+ 	
 }
 </script>
 </body>

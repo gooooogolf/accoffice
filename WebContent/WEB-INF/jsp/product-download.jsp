@@ -149,6 +149,8 @@ $(document).ready(function() {
     	}
     	return false;
     })
+    
+    getImage('${product.imgSrc }');
 });
 
 function deleteProduct(product) {
@@ -217,6 +219,30 @@ function validate(product) {
 		return false;	
 	}
 	return true;
+}
+
+function getImage(id) {
+	$.ajax({
+	    url: '${pageContext.request.contextPath}/upload/getImage?id=' + id,
+	    type: "GET",
+	    dataType:"json",
+	    contentType: "application/json",
+	    cache: false,
+	    success: function(uploadFile) {
+	    	if (uploadFile) {
+// 		    	$('#files').html('<div id="imgTemp"><a href="${pageContext.request.contextPath}/resources/temp/' + uploadFile.url + '" target="_blank">' + uploadFile.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
+		     	$('#files').html('<img id="imgSrc" class="img-responsive" src="${pageContext.request.contextPath}/resources/temp/' + uploadFile.url + '">');
+		     	$('#files').append('<input type="hidden" id="fileId" value="' + id + '">');
+		     	$('#progress').hide();
+	    	}
+
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+	    	$('.panel-heading').text(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown);
+	    }
+	});	
+	return false;
+ 	
 }
 </script>
 </body>

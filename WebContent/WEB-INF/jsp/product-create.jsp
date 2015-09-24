@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!--     ไม่ได้ใช้แล้ว 20150924 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -129,6 +130,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/fileupload/js/jquery.fileupload.js"></script>
 
 <script type="text/javascript">
+var fileId__ = null;
 $(document).ready(function() {
     'use strict';
     $('#fileupload').fileupload({
@@ -136,6 +138,7 @@ $(document).ready(function() {
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result, function (index, file) {
+            	fileId__ = file.id;
              	$('#files').html('<div id="imgTemp"><a href="${pageContext.request.contextPath}/resources/temp/' + file.url + '" target="_blank">' + file.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
              	$('#files').append('<img id="imgSrc" class="img-responsive" src="${pageContext.request.contextPath}/resources/temp/' + file.url + '">');
             });
@@ -155,7 +158,8 @@ $(document).ready(function() {
     
     $('#submit').click(function(){
     	var formData = $('#productForm').serializeObject();
-    	formData.imgSrc = $('#imgSrc').attr('src');
+//     	formData.imgSrc = $('#imgSrc').attr('src');
+		formData.imgSrc = fileId__;
     	if (validate(formData)) {
     		saveProduct(JSON.stringify(formData));
     	}

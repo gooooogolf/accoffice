@@ -22,6 +22,10 @@ public class Configuration {
 	public static final String MAIL_PORT;
 	public static final String TEMPLATE_JASPERREPORT_CONTEXTPATH;
 	
+	public static final String FTP_HOST;
+	public static final String FTP_USERNAME;
+	public static final String FTP_PASSWORD;
+	
 	static {
 		
 		Properties prop = new Properties();
@@ -44,9 +48,11 @@ public class Configuration {
 		MAIL_HOST = prop.getProperty("mail.host");
 		MAIL_USER = prop.getProperty("mail.user");
 		MAIL_PASSWORD = prop.getProperty("mail.password");
-		MAIL_PORT  = prop.getProperty("mail.port");
+		MAIL_PORT = prop.getProperty("mail.port");
 		TEMPLATE_JASPERREPORT_CONTEXTPATH = prop.getProperty("jasper.contextPath");
-
+		FTP_HOST = prop.getProperty("ftp.host");
+		FTP_USERNAME = prop.getProperty("ftp.user");
+		FTP_PASSWORD = prop.getProperty("ftp.password");
 	}
 
 }

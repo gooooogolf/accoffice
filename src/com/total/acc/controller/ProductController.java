@@ -56,9 +56,11 @@ public class ProductController {
 	
 	@RequestMapping(value = "/product/update/{id}", method = RequestMethod.GET)
     public String updateProduct(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("product", productService.find(id));
+		Product product = productService.find(id);
+		model.addAttribute("product", product);
 		return "product-update";
     }
+	
 	
 	@RequestMapping(value = "/product/download/{id}", method = RequestMethod.GET)
     public String updateDownloadProduct(@PathVariable("id") Integer id, Model model) {

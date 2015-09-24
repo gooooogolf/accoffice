@@ -3,8 +3,13 @@
  */
 package com.total.acc.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
@@ -16,11 +21,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.total.acc.model.domain.Product;
+import com.total.acc.model.domain.UploadFile;
 import com.total.acc.model.domain.Video;
 import com.total.acc.model.service.ProductService;
+import com.total.acc.model.service.UploadFileService;
 import com.total.acc.model.service.VideoService;
 
 /**
@@ -35,17 +43,25 @@ public class VideoController {
 	
 	@Autowired
 	private VideoService videoService;
-	
+	@Autowired
+	private UploadFileService uploadFileService;
 	@Autowired
 	private ProductService productService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-    public String vdoPage(Model model) {
+    public String vdoPage(Model model, HttpServletRequest request) {
 		List<Video> videos = videoService.findAll();
 		HashMap<String, Product> productMap = new HashMap<String, Product>();
+		Product product = null;
 		for (Video video: videos) {
 			if(productMap.get(video.getProductId()) == null) {
-				productMap.put(video.getProductId(), productService.find(Integer.parseInt(video.getProductId())));
+				product = productService.find(Integer.parseInt(video.getProductId()));
+				try {
+					product.setImgSrc(getImage(request, Integer.parseInt(product.getImgSrc())));
+				} catch(Exception e) {
+					
+				}	
+				productMap.put(video.getProductId(), product);
 			}
 		}
 		model.addAttribute("productMaps", productMap);
@@ -54,12 +70,19 @@ public class VideoController {
     }
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String vdoListPage(Model model) {
+    public String vdoListPage(Model model, HttpServletRequest request) {
 		List<Video> videos = videoService.findAll();
 		HashMap<String, Product> productMap = new HashMap<String, Product>();
+		Product product = null;
 		for (Video video: videos) {
 			if(productMap.get(video.getProductId()) == null) {
-				productMap.put(video.getProductId(), productService.find(Integer.parseInt(video.getProductId())));
+				product = productService.find(Integer.parseInt(video.getProductId()));
+				try {
+					product.setImgSrc(getImage(request, Integer.parseInt(product.getImgSrc())));
+				} catch(Exception e) {
+					
+				}	
+				productMap.put(video.getProductId(), product);
 			}
 		}
 		model.addAttribute("productMaps", productMap);
@@ -96,10 +119,42 @@ public class VideoController {
     }
 	
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public String viewVideo(@PathVariable("id") Integer id, Model model) {
+    public String viewVideo(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		Video video = videoService.find(id);
 		model.addAttribute("video", video);
-		model.addAttribute("product", productService.find(Integer.parseInt(video.getProductId())));
+		Product product = null;
+		try {
+			product = productService.find(Integer.parseInt(video.getProductId()));
+			product.setImgSrc(getImage(request, Integer.parseInt(product.getImgSrc())));
+		} catch(Exception e) {
+			
+		}	
+
+		model.addAttribute("product", product);
 		return "video-view";
+    }
+	
+    public String getImage(HttpServletRequest request, @RequestParam("id") int id) {
+		ServletContext servletContext = request.getSession().getServletContext();
+		String basePath = request.getContextPath() + "/resources/temp"; 
+		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
+		UploadFile uploadFile = uploadFileService.find(id);
+		if (uploadFile != null) {	
+			  try {
+				  File file = new File(uploadFolder + "/" + uploadFile.getName());
+				  if (!file.exists()) {
+//					  System.out.println("file is not exits!!");
+					  file.createNewFile(); 
+				  }
+				  FileOutputStream fos = new FileOutputStream(file); 
+				  fos.write(uploadFile.getImage());
+				  fos.close();
+				  return basePath + "/" +  uploadFile.getName();
+		        }catch(Exception e){
+		            e.printStackTrace();
+		            return basePath + "/none.jpg";
+		        }
+		}
+		return basePath + "/none.jpg";
     }
 }

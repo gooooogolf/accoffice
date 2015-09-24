@@ -4,6 +4,7 @@
 package com.total.acc.model.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,23 +38,27 @@ public class UploadFile implements Serializable{
 	@Column(name = "URL")
 	private String url;
 
+	@Column(name = "IMAGE", length = 10000)
+	private byte[] image;
+
 	public UploadFile() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UploadFile(int id, String name, int size, String url) {
+	public UploadFile(int id, String name, int size, String url, byte[] image) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.size = size;
 		this.url = url;
+		this.image = image;
 	}
 
 	@Override
 	public String toString() {
 		return "UploadFile [id=" + id + ", name=" + name + ", size=" + size
-				+ ", url=" + url + "]";
+				+ ", url=" + url + ", image=" + Arrays.toString(image) + "]";
 	}
 
 	public int getId() {
@@ -88,11 +93,17 @@ public class UploadFile implements Serializable{
 		this.url = url;
 	}
 
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-
 	
 	
 }
