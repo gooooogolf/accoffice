@@ -9,7 +9,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FilenameUtils;
@@ -38,8 +37,8 @@ public class UploadController {
 	
 	@RequestMapping(value="/file", method=RequestMethod.POST)
 	public @ResponseBody List<UploadFile> upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
-		ServletContext servletContext = request.getSession().getServletContext();
-		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
+//		ServletContext servletContext = request.getSession().getServletContext();
+//		String uploadFolder = servletContext.getRealPath("/resources/temp"); 
 //		String uploadFolder = "D://DATA/UPLOADFILE";
 //		System.out.println(uploadFolder);
 		String filename = null;
@@ -49,15 +48,30 @@ public class UploadController {
 						+ DateTime.HHcmmcss().replaceAll(":", "")
 						+ (FilenameUtils.getExtension(file.getOriginalFilename()) == "" ? "" : ("." + FilenameUtils.getExtension(file.getOriginalFilename())));
 //				File upLoadedfile = new File(uploadFolder + "/" + DateTime.yyyy() + "/" + DateTime.mm() + "/" + DateTime.dd());
-				File upLoadedfile = new File(uploadFolder);
-				if(!upLoadedfile.exists()) {
-					upLoadedfile.mkdirs();
-				}
-				upLoadedfile = new File(upLoadedfile + "/" + filename);
+//				if(!upLoadedfile.exists()) {
+//					upLoadedfile.mkdirs();
+//				}
+//				upLoadedfile = new File(upLoadedfile + "/" + filename);
+				File upLoadedfile = new File(filename);
 				upLoadedfile.createNewFile(); 
 				FileOutputStream fos = new FileOutputStream(upLoadedfile); 
 				fos.write(file.getBytes());
 				fos.close(); //setting the value of fileUploaded variable
+				
+				String filePath = request.getScheme() + "://" + Configuration.FTP_HOST + "/temp/" + filename;
+				URL url = new URL (filePath);
+				URLConnection connection = url.openConnection();
+				connection.connect(); 
+				HttpURLConnection httpConnection = (HttpURLConnection) connection;
+				int code = httpConnection.getResponseCode();
+				if (code != 200) {
+					FTPUploader ftpUploader = new FTPUploader(Configuration.FTP_HOST, Configuration.FTP_USERNAME, Configuration.FTP_PASSWORD);
+				    FileInputStream fileInputStream = new FileInputStream(filename);
+					ftpUploader.uploadFileWithStream(fileInputStream, "httpdocs/temp/" + filename);
+					ftpUploader.disconnect();
+				}
+				httpConnection.disconnect();
+				
 				logger.debug("Writing file to disk...done on " + upLoadedfile);	
 				
 				List<UploadFile> uploadedFiles = new ArrayList<UploadFile>();
@@ -71,6 +85,7 @@ public class UploadController {
 //				System.out.println(uploadFile);
 				uploadFileService.save(uploadFile);
 				uploadedFiles.add(uploadFile);
+				uploadFile.setUrl(filePath);
 				return uploadedFiles;
 			}
 		}catch(Exception e){

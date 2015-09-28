@@ -146,8 +146,8 @@ $(document).ready(function() {
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result, function (index, file) {
-             	$('#files').html('<div id="imgTemp"><a href="${pageContext.request.contextPath}/resources/temp/' + file.url + '" target="_blank">' + file.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
-             	$('#files').append('<img id="imgSrc" class="img-responsive" src="${pageContext.request.contextPath}/resources/temp/' + file.url + '">');
+             	$('#files').html('<div id="imgTemp"><a href="' + file.url + '" target="_blank">' + file.name + '</a>&nbsp;&nbsp;<a href="javascript:$(\'#imgTemp, #imgSrc\').remove()">[x]</a><br></div>');
+             	$('#files').append('<img id="imgSrc" class="img-responsive" src="' + file.url + '">');
              	$('#files').append('<input type="hidden" id="fileId" value="' + file.id + '">');
             });
             $('#progress').hide();
