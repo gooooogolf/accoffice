@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,7 +53,7 @@ public class QuotationController {
 	
 	@RequestMapping(value = "/contact/send.do", method = RequestMethod.POST)
 	@ResponseBody
-    public boolean sendContactMail(@RequestBody JSONObject jsonquotation, HttpServletRequest request, HttpServletResponse response) {		
+    public boolean sendContactMail(@RequestBody JSONObject jsonquotation, HttpServletRequest request, HttpServletResponse response) throws Exception {		
 		try {
 			Date effectiveDateTime = DateTime.stringtoDate(DateTime.ddsMMsyyyy() + " " + DateTime.HHcmmcss(), "dd/MM/yyyy HH:mm:ss");
 			List<Quotation> quotations = new ArrayList<Quotation>();
@@ -67,7 +66,7 @@ public class QuotationController {
 			float sumPrice = 0, vat = 0;
 			File pdf = null;
 //			String srcFolder = "D://DATA/";
-//			String srcFolder = "";
+			String srcFolder = new File("").getAbsolutePath() + File.separator;
 			if (!jsonArrayProduct.isEmpty()) {
 				String quotationId = "QT" + DateTime.yyyy_TH().substring(2, 4) + DateTime.mm() + String.format("%04d", quotationService.getQuotationLastId() + 1);
 				for (int i = 0; i < jsonArrayProduct.size(); i++) {
@@ -95,8 +94,11 @@ public class QuotationController {
 					}
 				}
 				
-				ServletContext servletContext = request.getSession().getServletContext();
-				String report = servletContext.getRealPath("/resources/report"); 
+//				ServletContext servletContext = request.getSession().getServletContext();
+//				String report = servletContext.getRealPath("/resources/report"); 
+				
+//				System.out.println(Configuration.class.getClassLoader().getResource("ACC_QUATATION.jasper").getFile());
+				
 				
 				JRBeanCollectionDataSource reportSource = new JRBeanCollectionDataSource(quotations);
 				
@@ -106,16 +108,26 @@ public class QuotationController {
 			    	parameters.put("quotationEmail", quotationContactEmail);
 			    	parameters.put("quotationName", quotationContactName);
 			    	parameters.put("quotationDate", DateTime.formatDate(effectiveDateTime, "dd/MM/yyyy", new Locale("th","TH")));
-			    	JasperPrint print = JasperFillManager.fillReport(report + "/ACC_QUATATION.jasper", parameters, reportSource);
+			    	JasperPrint print = JasperFillManager.fillReport(Configuration.class.getClassLoader().getResource("ACC_QUATATION.jasper").getFile(), parameters, reportSource);
 //			    	pdf = File.createTempFile(quotationId + "_", ".pdf", new File(srcFolder));
-			    	pdf = File.createTempFile(quotationId + "_", ".pdf");
+			    	pdf = new File(srcFolder + "/" + quotationId + ".pdf");
+			    	pdf.createNewFile();
 			    	FileOutputStream fout = new FileOutputStream(pdf);
 			    	JasperExportManager.exportReportToPdfStream(print, fout);  
+//			    	System.out.println(srcFolder + pdf.getName());
 			    	fout.close();
+						        
 			    } catch(JRException e) {
 			      e.printStackTrace();
 			    }
+			  			    
 			    
+//				FTPUploader ftpUploader = new FTPUploader(Configuration.FTP_HOST, Configuration.FTP_USERNAME, Configuration.FTP_PASSWORD);
+//			    FileInputStream fileInputStream = new FileInputStream(pdf);
+//				ftpUploader.uploadFileWithStream(fileInputStream, "httpdocs/temp/" + pdf.getName());
+//				ftpUploader.disconnect();
+				
+				
 		        String host = Configuration.MAIL_HOST;
 		        String port = Configuration.MAIL_PORT;
 		        String userName = Configuration.MAIL_USER;
@@ -126,7 +138,7 @@ public class QuotationController {
 		        String message = "เรียน คุณ" + quotationContactName + "<br> ใบเสนอราคาเลขที่ " + quotationId;
 		        String[] attachFiles = new String[1];
 //		        attachFiles[0] = srcFolder + pdf.getName();
-		        attachFiles[0] = pdf.getName();
+		        attachFiles[0] = srcFolder + "/" + pdf.getName();
 		        
 				MailUtil.sendEmailWithAttachments(host, port, userName, password, toAddress, subject, message, attachFiles);
 
@@ -134,8 +146,7 @@ public class QuotationController {
 
 			return quotations.isEmpty() ? false : true;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			throw e;
 		}
     }
 	

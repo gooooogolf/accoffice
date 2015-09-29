@@ -77,12 +77,20 @@ public class MailUtil {
 	 public static void sendEmailWithAttachments(String host, String port, final String userName, final String password, String[] to, String subject, String message, String[] attachFiles) throws AddressException, MessagingException {
 	        // sets SMTP server properties
 	        Properties properties = new Properties();
-	        properties.put("mail.smtp.host", host);
-	        properties.put("mail.smtp.port", port);
+//	        properties.put("mail.smtp.host", host);
+//	        properties.put("mail.smtp.port", port);
+//	        properties.put("mail.smtp.auth", "true");
+//	        properties.put("mail.smtp.starttls.enable", "true");
+//	        properties.put("mail.user", userName);
+//	        properties.put("mail.password", password);
+//	        properties.put("mail.smtp.ssl.trust", host);
+	        
 	        properties.put("mail.smtp.auth", "true");
 	        properties.put("mail.smtp.starttls.enable", "true");
-	        properties.put("mail.user", userName);
-	        properties.put("mail.password", password);
+	        properties.put("mail.smtp.host", host);
+	        properties.put("mail.smtp.debug", "true");
+	        properties.put("mail.smtp.port", port);
+	        properties.put("mail.smtp.ssl.trust", host);
 	        
 	        // creates a new session with an authenticator
 	        Authenticator auth = new Authenticator() {

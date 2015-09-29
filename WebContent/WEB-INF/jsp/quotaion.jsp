@@ -133,7 +133,7 @@ $(document).ready(function(){
 		    	window.scroll(0, 0); 	    	
 		    },
 		    error: function(jqXHR, textStatus, errorThrown) {
-		    	alert(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown).show();
+		    	alert(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown);
 		    }
 		});	
 	});
