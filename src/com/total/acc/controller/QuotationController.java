@@ -66,7 +66,8 @@ public class QuotationController {
 			Product product = null;
 			float sumPrice = 0, vat = 0;
 			File pdf = null;
-			String srcFolder = "D://DATA/";
+//			String srcFolder = "D://DATA/";
+//			String srcFolder = "";
 			if (!jsonArrayProduct.isEmpty()) {
 				String quotationId = "QT" + DateTime.yyyy_TH().substring(2, 4) + DateTime.mm() + String.format("%04d", quotationService.getQuotationLastId() + 1);
 				for (int i = 0; i < jsonArrayProduct.size(); i++) {
@@ -106,7 +107,8 @@ public class QuotationController {
 			    	parameters.put("quotationName", quotationContactName);
 			    	parameters.put("quotationDate", DateTime.formatDate(effectiveDateTime, "dd/MM/yyyy", new Locale("th","TH")));
 			    	JasperPrint print = JasperFillManager.fillReport(report + "/ACC_QUATATION.jasper", parameters, reportSource);
-			    	pdf = File.createTempFile(quotationId + "_", ".pdf", new File(srcFolder));
+//			    	pdf = File.createTempFile(quotationId + "_", ".pdf", new File(srcFolder));
+			    	pdf = File.createTempFile(quotationId + "_", ".pdf");
 			    	FileOutputStream fout = new FileOutputStream(pdf);
 			    	JasperExportManager.exportReportToPdfStream(print, fout);  
 			    	fout.close();
@@ -123,7 +125,8 @@ public class QuotationController {
 		        String subject = "ใบเสนอราคา TOTAL COMMUNICATION INTERNATIONAL CO., LTD";
 		        String message = "เรียน คุณ" + quotationContactName + "<br> ใบเสนอราคาเลขที่ " + quotationId;
 		        String[] attachFiles = new String[1];
-		        attachFiles[0] = srcFolder + pdf.getName();
+//		        attachFiles[0] = srcFolder + pdf.getName();
+		        attachFiles[0] = pdf.getName();
 		        
 				MailUtil.sendEmailWithAttachments(host, port, userName, password, toAddress, subject, message, attachFiles);
 

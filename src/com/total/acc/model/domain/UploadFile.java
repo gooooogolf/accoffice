@@ -38,7 +38,7 @@ public class UploadFile implements Serializable{
 	@Column(name = "URL")
 	private String url;
 
-	@Column(name = "IMAGE", length = 10000)
+	@Column(name = "IMAGE", length = 10000, columnDefinition="mediumblob")
 	private byte[] image;
 
 	public UploadFile() {
