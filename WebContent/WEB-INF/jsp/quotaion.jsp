@@ -52,6 +52,11 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">
+                	<div class="col-md-12">
+			  		<br>
+						<div id="alert-success" class="alert alert-success"><strong><span class="glyphicon glyphicon-send"></span> Success! Message sent.</strong></div>	  
+					    <div id="alert-danger" class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong> Error! Please check the inputs. (If form error!)</strong></div>
+			  		</div>
 				<form role="form" action="javascript:void(0)" method="post" id="quotationForm">
 				    <div class="col-lg-6">
 					      <div class="form-group">
@@ -130,7 +135,15 @@ $(document).ready(function(){
 		    },
 		    success: function(isSend) {
 		    	$('#alert-danger, #alert-success').hide();
-		    	window.scroll(0, 0); 	    	
+		    	window.scroll(0, 0); 	
+		    	if (isSend) {
+		    		$('#alert-success').text('คุณส่งข้อมูลเรียบร้อยแล้ว').show();
+		    		$(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+		    	}
+		    	else {
+		    		$('#alert-danger').text('เกิดข้อผิดพลาดในการส่งอีเมล์, กรุณาส่งอีกครั้ง').show();
+		    	}
+		    	
 		    },
 		    error: function(jqXHR, textStatus, errorThrown) {
 		    	alert(this.url + '\njqXHR status : ' + jqXHR.status + '\ntextStatus : ' + textStatus + '\nThrown : ' + errorThrown);
