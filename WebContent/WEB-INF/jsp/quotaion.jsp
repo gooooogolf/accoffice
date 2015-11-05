@@ -115,7 +115,7 @@
 var __ids = [], productIds = {};
 var trProductTemplate = '<tr id="trProduct{productId}"><td>{productName}</td><td><input type="text" id="txtProduct{productId}" class="form-control" size="2" maxlength="2" value="1"/></td></tr>'
 $(document).ready(function(){
-	
+	$('#alert-danger, #alert-success').hide();
 	$('#quotationForm').submit(function(){
 		var quotation = {
 				quotationEmail: $('#quotationEmail').val(),
@@ -131,7 +131,7 @@ $(document).ready(function(){
 		    contentType: "application/json",
 		    cache: false,
 		    beforeSend: function() {
-// 		    	$('#alert-success').text('กำลังส่งข้อมูล...').show();
+		    	$('#alert-success').text('กำลังส่งข้อมูล...').show();
 		    },
 		    success: function(isSend) {
 		    	$('#alert-danger, #alert-success').hide();
